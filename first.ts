@@ -1,2 +1,2 @@
-let a = "hello";
-a = 1;
+let a: String = "hello";
+a = 2;
