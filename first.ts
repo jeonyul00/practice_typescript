@@ -57,7 +57,11 @@ let asA: number = 123;
 asA = "string" as unknown as number; // 타입을 강제로 변경
 
 // never
-// never라는 타입이 뜨면 아무 타입도 올 수 없다. : 절대로 발생하지 않는 값
+// never라는 타입이 뜨면 아무 타입도 올 수 없다.
+
+// 절대 발생하지 않는 값
+type Never = string & number;
+
 function error(message: string): never {
   throw new Error(message);
 }
@@ -135,4 +139,34 @@ type OREX = { hello: "world" } | { jeon: "yul" }; // 하나만 있어도 됨
 const andex: ANDEX = { hello: "world", jeon: "yul" };
 const orex: OREX = { hello: "world" };
 
-// 타입 에일리언스와 인터페이스의 상속
+// ex
+type Animal = { breath: true };
+type Poyoryu = Animal & { breed: true };
+type Human = Poyoryu & { think: true };
+const jeonyul: Human = { breath: true, breed: true, think: true };
+const jeonyul2: Animal & Poyoryu & { think: true } = {
+  breath: true,
+  breed: true,
+  think: true,
+};
+
+// 타입을 집합으로 생각하자
+type A2 = string | number;
+type A3 = string;
+type A4 = string & number; // 이런 값은 없지만 아무튼 이 값이 가장 좁은 타입
+// 둘 중 A2가 더 넙은 타입
+// 좁은 타입에서 넓은 타입으로 대입 가능 === 반대는 불가능
+// 그럼 객체에서 넓고 좁은 것은? : 속성이 적을수록 넓은 타입
+type N = { name: string };
+type A = { age: number };
+type NAA = N & A;
+type NOA = N | A;
+
+// 넓은 타입과 좁은 타입의 대입 관계
+const C: NOA = { name: "jeonyul" };
+const D: NAA = { name: "jeonyul", age: 30 };
+const E: NAA = C; // x 안됨
+const F: NOA = D; // o 됨
+
+// 그런데 이건 안됨! : 객체에 리터럴 검사라는 것이 있음 , 리터럴을 직접 넣을 경우 타입이 넓냐 좁냐 검사 뿐 아니라 잉여속성 검사라는 것도 함
+const G: NOA = { name: "jeonyul", age: 30, married: false };
