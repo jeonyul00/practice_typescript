@@ -170,3 +170,131 @@ const F: NOA = D; // o 됨
 
 // 그런데 이건 안됨! : 객체에 리터럴 검사라는 것이 있음 , 리터럴을 직접 넣을 경우 타입이 넓냐 좁냐 검사 뿐 아니라 잉여속성 검사라는 것도 함
 const G: NOA = { name: "jeonyul", age: 30, married: false };
+// 변수를 하나 넣어서 대입하면 해결됨
+
+// void : 리턴값이 void, 매개변수가 void, 함수가 void
+// undefined는 됨 그러나 void와 undefined는 다르다
+function voidEx(): void {
+  return undefined;
+}
+
+// error 안남
+function voidEx2(callback: () => void): void {} // 여기서 void는 리턴값을 사용하지 않겠다 라는 뜻
+voidEx2(() => {
+  return "123";
+});
+
+const valueEx = voidEx2(() => {
+  return "123";
+});
+// 때문에 valueEx는 123이 아니고 void가 됨
+interface VoidEx {
+  fuc: () => void; // 여기서 void는 리턴값을 사용하지 않겠다 라는 뜻
+}
+
+// error 안남
+const VOIDEX: VoidEx = {
+  fuc() {
+    return "abc";
+  },
+};
+
+// unknown과 any
+// any : 타입 검사 포기
+// unknown : 지금 당장은 타입을 모를 때 : 대표적으로 error
+// try {
+// } catch (e) {
+//  여기서 e의 타입은 unknown이기 때문에 message를 쓸 수 없다 그렇기에 강제 형 변환필요
+//   e.message;
+// }
+try {
+} catch (e) {
+  (e as Error).message;
+}
+
+// 타입 좁히기 (타입 가드)
+const guard = (a: number | string | Array<any>) => {
+  if (typeof a === "string") {
+    a.split(",");
+    return;
+  }
+  if (typeof a === "number") {
+    a.toFixed(1);
+  }
+  if (Array.isArray(a)) {
+    a.push(1);
+  }
+};
+
+interface Cat {
+  meow: number;
+}
+interface Dog {
+  bow: number;
+}
+// 타입을 찾아주는 커스텀 함수
+/*
+    raw is Dog는 TypeScript의 타입 가드 함수를 정의하는 문법 중 하나입니다. 이는 함수의 반환값이 boolean 타입이며, 해당 값이 true인 경우에는 매개변수가 Dog 타입이라는 것을 TypeScript 컴파일러에게 알리는 역할을 합니다.
+    예를 들어, 위의 코드에서 catOrDog 함수는 Cat 타입과 Dog 타입 중 하나의 매개변수를 받아서, 해당 매개변수가 Dog 타입인지 여부를 검사합니다. 이 때, (raw as Cat).meow는 raw 매개변수가 Cat 타입인 경우 meow 프로퍼티를 참조하여 검사합니다. 만약 meow 프로퍼티가 존재한다면, 해당 매개변수는 Cat 타입이므로, false 값을 반환합니다. 그렇지 않은 경우에는 Dog 타입이므로, true 값을 반환합니다.
+    이처럼 raw is Dog는 함수의 반환값이 boolean 타입이며, 해당 값이 true인 경우 매개변수가 Dog 타입임을 TypeScript 컴파일러에게 알리는 역할을 합니다. 이를 타입 가드 함수라고 부르며, 함수명 뒤에 is 키워드를 사용하여 정의할 수 있습니다. 타입 가드 함수를 사용하면 TypeScript 컴파일러가 타입 검사를 더욱 정확하게 수행할 수 있으므로, 코드의 안정성과 가독성을 향상시킬 수 있습니다.
+*/
+const catOrDog = (raw: Cat | Dog): raw is Dog => {
+  if ((raw as Cat).meow) {
+    return false;
+  }
+  return true;
+};
+const exValue: Cat = { meow: 1 };
+catOrDog(exValue);
+
+// {}와 Object와 object
+// {}와 Object는 === 모든타입 , null과 undefined 제외
+// object는 === 객체
+const x: {} = "string";
+const y: Object = "string";
+const z: object = "string"; // x
+
+// readonly
+interface ReadOnly {
+  readonly a: string;
+  b: string;
+}
+
+// 인덱스 시그니처 : 전부 다 한 타입일 때 : 모든 키는 스트링이고, 밸류는 넘버이다
+type AllString = { [key: string]: number };
+
+// class : 그 자체로 타입이 될 수 있으나 new ()를 가르킴 (인스턴스)
+// class classEx {
+//   a: string;
+//   b: number;
+//   constructor() {
+//     this.a = "123";
+//     this.b = 123;
+//   }
+// }
+class classEx {
+  ca: number = 1;
+  cb: number = 1;
+}
+
+// 옵셔널, 제네렉
+const optinal = (x: number, y?: number, z?: number) => {};
+
+// 제네릭 : 타입을 아직 모름, 실제 호출 할 때 타입을 정함 : 같은 타입으로 지정됨
+// function add4<T>(x: T, y: T): T {
+//   return x + y;
+// }
+
+// 반드시 스트링 또는 넘버 둥 중 하나로 같은 타입이 왔으면 좋겠다
+function add4<T extends number | string>(x: T, y: T): T {
+  return x + y;
+}
+
+// 기본값
+const defaultValue = (a: number = 1, b: string = "string"): void => {};
+const defaultValueCallback = (
+  callback: { children: string } = { children: "jeonyul" }
+): string => {
+  return callback.children;
+};
+const aaaa = <T = unknown>(x: T, y: T): void => {};
