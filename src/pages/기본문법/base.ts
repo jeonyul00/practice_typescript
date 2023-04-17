@@ -28,3 +28,14 @@ const fiveString: string = "5";
     number는 기본적으로 제공되는 내장 타입으로 모든 숫자를 나타낸다.
     Number은 객체를 나타낸다.
 */
+
+const allowFunc: (x: number, y: number) => number = (x, y) => x + y;
+
+const arr: number[] = [1, 2, 3];
+const arr2: Array<number> = [1, 2, 3];
+const arr3: [string, number, number] = ["jeonyul", 29, 20];
+
+const num: number = 1;
+type Add = () => number;
+interface Minus {}
+Array<string>;

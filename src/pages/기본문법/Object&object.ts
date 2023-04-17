@@ -3,7 +3,8 @@
 // object는 === 객체
 const x: {} = "string";
 const y: Object = "string";
-const z: object = "string"; // x
+// const z: object = "string"; // x
+const z: object = { key: "value" };
 
 // readonly
 interface ReadOnly {

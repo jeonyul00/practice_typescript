@@ -7,3 +7,7 @@ let myVari: any = "Hello World";
 
 const myLength1: number = (<string>myVari).length; // 이거 가독성 참 떨어지네
 const myLength2: number = (myVari as string).length;
+
+let asomeStr = "string";
+// asomeStr = 1 // 문자열을 숫자로 바꾸려니까 안됨 : 강제 형 변환 필요
+asomeStr = 1 as unknown as string;

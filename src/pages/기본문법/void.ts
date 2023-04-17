@@ -26,3 +26,9 @@ const VOIDEX: VoidEx = {
     return "abc";
   },
 };
+
+/* 
+  매개 변수에서 void : 사용하지 않겠다
+  반환형 void : 없다.
+  메서드의 void : 사용하지 않겠다.
+*/

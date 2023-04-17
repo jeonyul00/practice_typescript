@@ -16,7 +16,7 @@ const myNumber = 123;
 type MyNumberType = typeof myNumber;
 // MyNumberType의 타입은 123 입니다.
 
-function myFunction(a: string, b: boolean) {
+function myFunction2(a: string, b: boolean) {
   // ...
 }
 type MyFunctionType = typeof myFunction;
