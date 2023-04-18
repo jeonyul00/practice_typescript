@@ -29,4 +29,9 @@ const b: B = (arg: any) => console.log(arg);
 b = a; // OK
 a = b; // Error: B 타입은 A 타입에 할당될 수 없습니다.
 
+//
 /* 리턴 값은 더 넓은 값이면 대입 가능, 근데 왜 매개변수는 반대지? : 매개변수는 좁은 값이면 대입 가능 */
+const exFunc = (x: string | number): string => x.toString();
+type exType = (x: string) => number | string;
+let value2: exType = exFunc;
+//
