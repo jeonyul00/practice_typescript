@@ -19,11 +19,11 @@
 // function myFunction2(a: string, b: boolean) {
 //   // ...
 // }
-// type MyFunctionType = typeof myFunction;
+// type MyFunctionType = typeof myFunction2;
 // // MyFunctionType의 타입은 (a: string, b: boolean) => void 입니다.
 
 // const objEx = { a: 123, b: "123", c: null } as const;
 // // 값을 타입으로 쓰고 싶을 때 : type of
 // type keyEx = typeof objEx; // { a: number, b: string, c: null}
 // type keyEx2 = keyof typeof objEx; // "a" | "b" | "c"
-// type valueEx = typeof objEx[keyof typeof objEx]; // 123 | "123" | null
+// type valueEx = (typeof objEx)[keyof typeof objEx]; // 123 | "123" | null

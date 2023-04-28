@@ -1,5 +1,5 @@
 // // {}와 Object와 object
-// // {}와 Object는 === 모든타입 , null과 undefined 제외
+// // {}와 Object는 === 모든타입 , null과 undefined 제외 !!!!!!!!!!!
 // // object는 === 객체
 // const x: {} = "string";
 // const y: Object = "string";
