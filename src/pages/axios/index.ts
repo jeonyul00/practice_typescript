@@ -14,7 +14,9 @@ interface Post {
     value.data.title;
     value.data.userId;
   } catch (e) {
-    console.log(e);
+    // axios 에러 뿐 아니라 다른 에러가 걸릴 수 있다.
+    const error = (e as AxiosError).response;
+    console.log(error?.data);
   }
   //   --
   try {
