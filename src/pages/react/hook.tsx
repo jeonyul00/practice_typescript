@@ -1,30 +1,3 @@
-// import React, {
-//   FC,
-//   FunctionComponent,
-//   useCallback,
-//   useEffect,
-//   useRef,
-//   useState,
-// } from "react";
-
-// interface P {
-//   name: string;
-//   age: number;
-// }
-
-// // FunctionComponent === FC
-// const hook: FC<P> = (props) => {
-//   const [ex, setEx] = useState();
-//   const focus = useRef();
-
-//   useEffect(() => {}, []);
-
-//   const exFunc = useCallback(() => {}, []);
-
-//   return <div>hook</div>;
-// };
-
-// export default hook;
 import * as React from "react";
 import { useState, useCallback, useRef, useEffect } from "react";
 
@@ -32,18 +5,18 @@ const WordRelay: React.FC = () => {
   const [word, setWord] = useState("yul");
   const [value, setValue] = useState("");
   const [result, setResult] = useState("");
-  const inputEl = useRef(null);
+  const inputEl = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     console.log("useEffect");
   }, []);
 
   const onSubmitForm = useCallback(
-    (e) => {
+    (e: React.FormEvent<HTMLFormElement>) => {
       e.preventDefault();
       const input = inputEl.current;
       if (word[word.length - 1] === value[0]) {
-        setResult("딩동댕");
+        setResult("ok");
         setWord(value);
         setValue("");
         if (input) {
@@ -60,7 +33,7 @@ const WordRelay: React.FC = () => {
     [word, value]
   );
 
-  const onChange = useCallback((e) => {
+  const onChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.currentTarget.value);
   }, []);
 
