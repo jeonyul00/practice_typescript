@@ -1,0 +1,27 @@
+{
+  // compilerOptions : ts를 js로 변환하는 과정이나, 타입 검사 등 상세한 설정은 이 안에서 설정
+  "compilerOptions": {
+    // 컴파일 되는 자바스크립트의 버전 설정
+    "target": "ES6",
+    // 모듈 옵션
+    "module": "ES6",
+    // 컴파일 되는 파일들의 위치 설정
+    "outDir": "dist",
+    // 타입 검사 시 엄격도 설정
+    "strict": true,
+    // 각 각의 파일을 어떤 모듈로 감지할 것인지 설정
+    // ts는 기본적으로 모든 ts파일을 전역 모듈로 봄 : 다른 파일이라도 같은 변수명을 사용하면 ts error
+    // 이를 해결 : 각 각의 ts파일을 개별 모듈로 변경
+    "moduleDetection": "force"
+    // 엄격한 null 검사 설정
+    // null type이 아닌 값에 null을 허용할 것 인지
+    // "strictNullChecks": false
+  },
+  // ts-node는 기본적으로 commonJS 기반이기에 es를 인식 못함 : 인식하도록 설정
+  // 이 전에 package.json에서 "type": "module" 설정
+  "ts-node": {
+    "esm": true
+  },
+  // 범위 지정 : tsc 입력 시 src 밑으로 한 번에 ts로 컴파일 됨
+  "include": ["src"]
+}
