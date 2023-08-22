@@ -16,7 +16,7 @@ let voidValue: void;
 // voidValue = unknown;
 // voidValue = NaN;
 
-// o : 이건 왜 되냐
+// o : 이건 왜 되냐 : 업캐스팅
 voidValue = undefined;
 
 // --------------------
