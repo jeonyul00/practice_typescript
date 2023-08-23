@@ -19,7 +19,8 @@ type D = (value: 10) => void;
 let c: C = (value) => {};
 let d: D = (value) => {};
 
-c = d; // 매개변수를 기준으로 판단할 때는 업캐스팅은 허용 불가
+// 매개변수를 기준으로 판단할 때는 업캐스팅은 허용 불가
+// c = d;
 d = c; // 다운캐스팅일 경우 가능
 
 // 왜?
@@ -47,7 +48,7 @@ let animalFunc2 = (value: Animal) => {
   // console.log(value.color);
 };
 
-// 매개변수의 호환 (배개변수의 개수가 다를 때)
+// 매개변수의 호환 (매개변수의 개수가 다를 때)
 type Func1 = (a: number, b: number) => void;
 type Func2 = (a: number) => void;
 
