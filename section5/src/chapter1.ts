@@ -4,7 +4,6 @@ interface Animal {
   age: number;
 }
 
-// 자바랑 헷갈리네.. 상속 키워드 아닌가..
 interface Dog extends Animal {
   isBark: boolean;
 }
