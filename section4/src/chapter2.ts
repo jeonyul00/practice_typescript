@@ -12,7 +12,7 @@ a = b;
 // x
 // b = a;
 
-// 매개변수의 호환 (배개변수의 개수가 같을 때)
+// 매개변수의 호환 (매개변수의 개수가 같을 때)
 type C = (value: number) => void;
 type D = (value: 10) => void;
 
