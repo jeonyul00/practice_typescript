@@ -8,7 +8,8 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "outDir": "disc",
     "moduleDetection": "force",
-    "allowJs": true
+    "allowJs": true,
+    "jsx": "react"
   },
   "ts-node": {
     "esm": true
