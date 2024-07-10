@@ -1,5 +1,4 @@
 // void
-
 function func1(): string {
   return "str";
 }
