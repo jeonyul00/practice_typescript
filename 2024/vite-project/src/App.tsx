@@ -1,28 +1,30 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import "./App.css";
-
-interface Todo {
-  id: number;
-  content: string;
-}
+import Editor from "./components/Editor";
+import Todo from "./types";
+import TodoItem from "./components/TodoItem";
 
 function App() {
-  const [text, setText] = useState<string>("");
   const [todos, setTodos] = useState<Todo[]>([]);
+  const idRef = useRef<number>(0);
 
-  const onChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setText(e.target.value);
+  const add = (text: string) => {
+    setTodos([...todos, { id: idRef.current++, content: text }]);
   };
 
-  const add = () => {
-    if (text === "") return;
+  const onClieDelete = (id: number) => {
+    setTodos(todos.filter((todo) => todo.id !== id));
   };
 
   return (
     <div className="App">
       <h1>to do list</h1>
-      <input value={text} onChange={onChangeInput} />
-      <button onClick={add}>add</button>
+      <Editor callback={add} />
+      <div>
+        {todos.map((todo) => (
+          <TodoItem key={todo.id} {...todo} onClieDelete={onClieDelete} />
+        ))}
+      </div>
     </div>
   );
 }
